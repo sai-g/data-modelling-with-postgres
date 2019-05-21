@@ -17,9 +17,10 @@ def drop_table_queries():
 
 # CREATE TABLES
 
-songplay_table_create = ("CREATE TABLE IF NOT EXISTS songplays(songplay_id SERIAL PRIMARY KEY, start_time timestamp, "
-                         "user_id varchar, level varchar, song_id varchar, artist_id varchar, session_id int, "
-                         "location varchar, user_agent varchar);")
+songplay_table_create = ("CREATE TABLE IF NOT EXISTS songplays(songplay_id SERIAL PRIMARY KEY, "
+                         "start_time timestamp NOT NULL, user_id varchar NOT NULL, level varchar NOT NULL, "
+                         "song_id varchar, artist_id varchar, session_id int NOT NULL, location varchar NOT NULL, "
+                         "user_agent varchar NOT NULL);")
 
 user_table_create = ("CREATE TABLE IF NOT EXISTS users(user_id varchar PRIMARY KEY, first_name varchar NOT NULL, "
                      "last_name varchar NOT NULL, gender varchar NOT NULL, level varchar NOT NULL);")
@@ -40,7 +41,7 @@ songplay_table_insert = ("INSERT INTO songplays (start_time, user_id, level, son
                          "location, user_agent) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)")
 
 user_table_insert = "INSERT INTO users (user_id, first_name, last_name, gender, level) VALUES(%s,%s,%s,%s,%s) " \
-                    "ON CONFLICT (user_id) DO NOTHING"
+                    "ON CONFLICT (user_id) DO UPDATE SET level=EXCLUDED.level"
 
 song_table_insert = "INSERT INTO songs(song_id, title, artist_id, year, duration) VALUES(%s, %s, %s, %s, %s) " \
                     "ON CONFLICT (song_id) DO NOTHING"
