@@ -7,7 +7,7 @@ from create_tables import CONNECT_TO_DB, SPARKIFY_DB_NAME, USER_NAME, PASSWORD, 
 
 
 def process_song_file(cur, filepath):
-    """ This function loads data from song_data directory into song and artist table """
+    """ This function loads data from song_data directory into songs and artists table """
     # open song file
     df = pd.read_json(filepath, typ='series')
 
@@ -22,6 +22,7 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """ This function loads data from log_data directory into time, users and songplay table """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -68,6 +69,7 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """ function to collect all the files from the directory in the input """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):

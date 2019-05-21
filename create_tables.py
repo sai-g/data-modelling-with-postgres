@@ -16,6 +16,7 @@ CONNECT_TO_DB = "host={} dbname={} user={} password={}"
 
 
 def create_database():
+    """ function to create database and to return db cursor and connection """
     global cur
     try:
         # connect to default database
@@ -46,12 +47,14 @@ def create_database():
 
 
 def drop_tables(cur, conn):
+    """ This function iterates over drop table queries to execute each sql statement """
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """ This function iterates over create table queries to execute each sql statement """
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()

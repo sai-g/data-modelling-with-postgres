@@ -5,7 +5,7 @@ Basically, we are provided with the analytics of songs & user activity on their 
 analytics team in build an ETL pipeline to load data from JSON metadata to PostGres database. I have followed star 
 schema to define fact and dimension tables
 
-####Database Schema diagram
+#### Database Schema diagram
  
 ![alt text][logo]
 
